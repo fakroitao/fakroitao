@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฝากรอยเท้า - ท่องเที่ยวเดินป่าและผจญภัยสุดเร้าใจ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        forest: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        earth: {
+                            500: '#b45309',
+                            600: '#92400e',
+                            700: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.65)), url('https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 bg-forest-700 text-white rounded-xl flex items-center justify-center shadow-md group-hover:bg-forest-800 transition">
+                    <i class="fa-solid fa-mountain-sun text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold tracking-tight text-gray-900">Wild<span class="text-forest-700">Trail</span> TH</span>
+                    <span class="block text-xs text-gray-500 font-medium tracking-widest uppercase">Trekking & Exploration</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-gray-600">
+                <a href="#trips" class="hover:text-forest-700 transition">ทริปเดินป่าทั้งหมด</a>
+                <a href="#features" class="hover:text-forest-700 transition">ทำไมต้องเลือกเรา</a>
+                <a href="#reviews" class="hover:text-forest-700 transition">รีวิวจากนักเดินทาง</a>
+                <a href="#contact" class="hover:text-forest-700 transition">ติดต่อเรา</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button onclick="scrollToTrips()" class="bg-forest-700 hover:bg-forest-800 text-white px-5 py-2.5 rounded-xl font-medium shadow-sm hover:shadow transition flex items-center gap-2">
+                    <i class="fa-solid fa-compass"></i> จองทริปเลย
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-[580px] flex items-center justify-center text-center px-4 py-20 relative">
+        <div class="max-w-4xl mx-auto text-white">
+            <span class="bg-forest-700/80 text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-sm inline-block mb-4">
+                <i class="fa-solid fa-fire text-amber-400 mr-1.5"></i> เปิดจองทริปฤดูกาลเดินป่า 2026 พร้อมระบบเลือกที่นั่งและอัปสลิปออนไลน์
+            </span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                สัมผัสความงามของธรรมชาติ <br class="hidden sm:inline">และพิชิตยอดเขาสุดท้าทาย
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+                ร่วมผจญภัยไปกับไกด์ท้องถิ่นผู้เชี่ยวชาญ สัมผัสทะเลหมอก ดอกไม้ป่า และวิถีชีวิตขุนเขาไทยอย่างปลอดภัย
+            </p>
+            
+            <!-- Quick Search Bar -->
+            <div class="bg-white p-3 sm:p-4 rounded-2xl shadow-2xl max-w-3xl mx-auto text-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="text-left px-3 py-1.5 border border-gray-200 rounded-xl hover:border-forest-600 transition">
+                    <label class="block text-xs font-semibold text-gray-400 uppercase">สถานที่ / ภูเขา</label>
+                    <select id="search-destination" class="w-full bg-transparent font-medium text-gray-800 focus:outline-none cursor-pointer mt-0.5">
+                        <option value="">ทุกพื้นที่</option>
+                        <option value="เชียงใหม่">เชียงใหม่ (Doi Luang / Kew Mae Pan)</option>
+                        <option value="พะเยา">พะเยา (Phu Lang Ka)</option>
+                        <option value="สุราษฎร์ธานี">สุราษฎร์ธานี (Khao Sok)</option>
+                        <option value="ตาก">ตาก (Mon Chong)</option>
+                    </select>
+                </div>
+                <div class="text-left px-3 py-1.5 border border-gray-200 rounded-xl hover:border-forest-600 transition">
+                    <label class="block text-xs font-semibold text-gray-400 uppercase">ระดับความยาก</label>
+                    <select id="search-difficulty" class="w-full bg-transparent font-medium text-gray-800 focus:outline-none cursor-pointer mt-0.5">
+                        <option value="">ทุกระดับความยาก</option>
+                        <option value="ง่าย">ง่าย (มือใหม่เที่ยวได้)</option>
+                        <option value="ปานกลาง">ปานกลาง (มีประสบการณ์บ้าง)</option>
+                        <option value="ยาก">ยาก (ท้าทาย / สายลุย)</option>
+                    </select>
+                </div>
+                <div class="flex items-center">
+                    <button onclick="filterTrips()" class="w-full bg-forest-700 hover:bg-forest-800 text-white font-semibold py-3.5 px-6 rounded-xl shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass"></i> ค้นหาทริป
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="bg-white border-b border-gray-100 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-4">
+                <div class="text-3xl font-bold text-forest-700 mb-1">100+</div>
+                <div class="text-sm text-gray-500 font-medium">พิชิตยอดเขาสำเร็จ</div>
+            </div>
+            <div class="p-4">
+                <div class="text-3xl font-bold text-forest-700 mb-1">1,500+</div>
+                <div class="text-sm text-gray-500 font-medium">นักเดินทางพึงพอใจ</div>
+            </div>
+            <div class="p-4">
+                <div class="text-3xl font-bold text-forest-700 mb-1">15 ปี</div>
+                <div class="text-sm text-gray-500 font-medium">ประสบการณ์นำเที่ยวป่า</div>
+            </div>
+            <div class="p-4">
+                <div class="text-3xl font-bold text-forest-700 mb-1">100%</div>
+                <div class="text-sm text-gray-500 font-medium">ปลอดภัยด้วยไกด์ท้องถิ่น</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trips Grid Section -->
+    <main id="trips" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+                <span class="text-forest-700 font-bold uppercase tracking-wider text-sm">ทริปเดินป่าแนะนำ</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-1">เลือกเส้นทางผจญภัยครั้งใหม่ของคุณ</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-500 font-medium whitespace-nowrap">เรียงตาม:</span>
+                <select id="sort-by" onchange="sortTrips()" class="bg-white border border-gray-200 text-gray-700 text-sm rounded-xl px-4 py-2.5 focus:outline-none focus:border-forest-600 font-medium shadow-sm cursor-pointer">
+                    <option value="default">แนะนำสำหรับคุณ</option>
+                    <option value="price-asc">ราคา: น้อยไปมาก</option>
+                    <option value="price-desc">ราคา: มากไปน้อย</option>
+                    <option value="duration">ระยะเวลา (วัน)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="trips-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic trip cards injected via JS -->
+        </div>
+    </main>
+
+    <!-- Multi-Step Booking Modal with Seat/Tent Selection & Payment Slip Upload -->
+    <div id="trip-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[95vh] overflow-y-auto shadow-2xl relative transform transition-all">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-20 bg-white/90 hover:bg-white text-gray-700 w-10 h-10 rounded-full flex items-center justify-center shadow-md transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Step Progress Indicator Bar -->
+            <div id="modal-header-container" class="sticky top-0 bg-white z-10 px-6 pt-6 pb-4 border-b border-gray-100">
+                <div id="step-indicators" class="flex items-center justify-between max-w-lg mx-auto">
+                    <div class="flex flex-col items-center step-ind active" data-step="1">
+                        <div class="w-8 h-8 rounded-full bg-forest-700 text-white flex items-center justify-center font-bold text-xs">1</div>
+                        <span class="text-[11px] font-semibold text-gray-600 mt-1">รายละเอียด</span>
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-200"></div>
+                    <div class="flex flex-col items-center step-ind" data-step="2">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold text-xs">2</div>
+                        <span class="text-[11px] font-semibold text-gray-500 mt-1">ที่นั่ง/เต็นท์</span>
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-200"></div>
+                    <div class="flex flex-col items-center step-ind" data-step="3">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold text-xs">3</div>
+                        <span class="text-[11px] font-semibold text-gray-500 mt-1">ข้อมูลผู้จอง</span>
+                    </div>
+                    <div class="w-12 h-0.5 bg-gray-200"></div>
+                    <div class="flex flex-col items-center step-ind" data-step="4">
+                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold text-xs">4</div>
+                        <span class="text-[11px] font-semibold text-gray-500 mt-1">ชำระเงิน</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-body-content" class="p-6 sm:p-8">
+                <!-- Dynamically updated step contents -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-8 text-center shadow-2xl">
+            <div class="w-20 h-20 bg-forest-100 text-forest-700 rounded-full flex items-center justify-center mx-auto mb-5 text-3xl shadow-inner">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-1">ส่งหลักฐานการชำระเงินสำเร็จ!</h3>
+            <p class="text-xs text-forest-700 font-semibold mb-4" id="success-booking-code">รหัสการจอง: WT-2026-8942</p>
+            <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+                ทางเราได้รับสลิปโอนเงินของคุณแล้ว เจ้าหน้าที่กำลังตรวจสอบความถูกต้อง และจะส่งตั๋วอิเล็กทรอนิกส์พร้อมคู่มือการเตรียมตัวให้ทางอีเมลภายใน 30 นาที
+            </p>
+            <button onclick="closeSuccessModal()" class="w-full bg-forest-700 hover:bg-forest-800 text-white font-semibold py-3.5 rounded-xl shadow transition">
+                กลับสู่หน้าหลัก
+            </button>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="bg-white py-20 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-forest-700 font-bold uppercase tracking-wider text-sm">ทำไมต้อง WildTrail TH</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-1">สิ่งที่คุณจะได้รับจากทริปของเรา</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-14 h-14 bg-forest-100 text-forest-700 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">ไกด์ท้องถิ่นมืออาชีพ</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        นำทางโดยพรานป่าและไกด์ท้องถิ่นผู้ชำนาญเส้นทาง รักษากฎระเบียบอุทยาน และดูแลความปลอดภัยตลอดเส้นทางอย่างใกล้ชิด
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-14 h-14 bg-forest-100 text-forest-700 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">อาหารแคมป์ปิ้งรสเลิศ</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        อิ่มอร่อยกับอาหารท้องถิ่นสดใหม่ ปรุงท่ามกลางบรรยากาศธรรมชาติ พร้อมน้ำดื่มสะอาดและเครื่องดื่มอุ่นๆ ยามค่ำคืน
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition">
+                    <div class="w-14 h-14 bg-forest-100 text-forest-700 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-sm">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">อุปกรณ์ส่วนกลางครบครัน</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">
+                        เตรียมเต็นท์คุณภาพสูง ฟูกนอน ถุงนอน และอุปกรณ์ความปลอดภัย พร้อมประกันอุบัติเหตุการเดินทางตลอดทริป
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-forest-700 font-bold uppercase tracking-wider text-sm">ความประทับใจ</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-1">เสียงจากนักเดินทางจริง</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic mb-6 leading-relaxed text-sm">
+                            "ประทับใจทริปดอยหลวงเชียงดาวมากครับ ไกด์ดูแลดีมาก อาหารอร่อย วิวทะเลหมอกยามเช้าคุ้มค่ากับความเหนื่อย ฟังก์ชันจองเต็นท์และอัปสลิปสะดวกสุดๆ"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">คุณพิมพ์ชนก (น้ำฝน)</h4>
+                            <span class="text-xs text-gray-500">ทริปดอยหลวงเชียงดาว 2 วัน 1 คืน</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic mb-6 leading-relaxed text-sm">
+                            "ภูลังกาผาช้างน้อยสวยมาก ทะเลหมอกปังสุดๆ ระบบเลือกเบาะรถตู้ VIP ทำให้เดินทางไกลสบายไม่ปวดตัวเลยครับ แนะนำเลย"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">คุณธนภัทร (เต้ย)</h4>
+                            <span class="text-xs text-gray-500">ทริปภูลังกา ผาช้างน้อย พะเยา</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 gap-1 mb-4 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic mb-6 leading-relaxed text-sm">
+                            "เขาสก ล่องแพไม้ไผ่คanoeing สนุกและธรรมชาติสมบูรณ์มาก ทีมงานจัดระเบียบดีเยี่ยม ชำระเงินง่ายอัปสลิปรวดเร็ว ประทับใจมากครับ"
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Reviewer" class="w-12 h-12 rounded-full object-cover">
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">คุณณัฐ ญา</h4>
+                            <span class="text-xs text-gray-500">ทริปอุทยานแห่งชาติเขาสก สุราษฎร์ธานี</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-gray-400 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-forest-700 text-white rounded-xl flex items-center justify-center shadow">
+                        <i class="fa-solid fa-mountain-sun"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white tracking-tight">Wild<span class="text-forest-600">Trail</span> TH</span>
+                </div>
+                <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                    ผู้ให้บริการนำเที่ยวเดินป่าและผจญภัยธรรมชาติชั้นนำในประเทศไทย มุ่งเน้นความปลอดภัย ความประทับใจ และการท่องเที่ยวเชิงอนุรักษ์
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-forest-700 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-forest-700 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-forest-700 text-white rounded-xl flex items-center justify-center transition"><i class="fa-brands fa-line"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">ลิงก์ด่วน</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#trips" class="hover:text-white transition">ทริปเดินป่าทั้งหมด</a></li>
+                    <li><a href="#features" class="hover:text-white transition">ทำไมต้องเลือกเรา</a></li>
+                    <li><a href="#reviews" class="hover:text-white transition">รีวิวจากลูกค้า</a></li>
+                    <li><a href="#" class="hover:text-white transition">เงื่อนไขการจองและยกเลิก</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">จุดหมายปลายทางยอดนิยม</h4>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" class="hover:text-white transition">ดอยหลวงเชียงดาว (เชียงใหม่)</a></li>
+                    <li><a href="#" class="hover:text-white transition">ภูลังกา ผาช้างน้อย (พะเยา)</a></li>
+                    <li><a href="#" class="hover:text-white transition">อุทยานแห่งชาติเขาสก (สุราษฎร์ธานี)</a></li>
+                    <li><a href="#" class="hover:text-white transition">กิ่วแม่ปาน ดอยอินทนนท์ (เชียงใหม่)</a></li>
+                    <li><a href="#" class="hover:text-white transition">ดอยม่อนจอง (ตาก)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">ติดต่อเรา</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot mt-1 text-forest-500"></i>
+                        <span>123/45 ถนนนิมมานเหมินท์ ตำบลสุเทพ อำเภอเมือง จังหวัดเชียงใหม่ 50200</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-phone text-forest-500"></i>
+                        <span>089-123-4567, 053-999-888</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fa-solid fa-envelope text-forest-500"></i>
+                        <span>contact@wildtrailthailand.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-gray-800 text-center text-xs text-gray-500">
+            &copy; 2026 WildTrail Thailand Co., Ltd. All rights reserved. Designed for outdoor enthusiasts.
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Tour Database
+        const tripsData = [
+            {
+                id: 1,
+                title: "ดอยหลวงเชียงดาว - ชมทะเลหมอกและกิ่วปو",
+                destination: "เชียงใหม่",
+                region: "ภาคเหนือ",
+                duration: "2 วัน 1 คืน",
+                durationDays: 2,
+                difficulty: "ยาก",
+                price: 3890,
+                rating: 4.9,
+                reviewsCount: 128,
+                image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+                overview: "พิชิตยอดเขาอันดับ 3 ของประเทศไทย ชมความอลังการของทะเลหมอก พระอาทิตย์ตกดินที่สวยงามที่สุด และดอกไม้หายากบนดอยสูง",
+                meetingPoint: "หน่วยจัดการต้นน้ำแม่แมะ หรือ ตัวเมืองเชียงใหม่ (จุดนัดพบ ปั๊ม ปตท. ข่วงสิงห์)",
+                included: [
+                    "ไกด์ท้องถิ่นผู้เชี่ยวชาญ",
+                    "ลูกหาบส่วนกลาง (ดูแลสัมภาระส่วนกลางและเต็นท์)",
+                    "อาหาร 4 มื้อ และน้ำดื่มสะอาดตลอดทริป",
+                    "ค่าธรรมเนียมอุทยานแห่งชาติ",
+                    "เต็นท์ ถุงนอน และแผ่นรองนอน",
+                    "ประกันอุบัติเหตุวงเงิน 1,000,000 บาท"
+                ],
+                itinerary: [
+                    { day: "วันที่ 1", title: "เดินทางสู่จุดเริ่มเดิน - พิชิตยอดเขาชมพระอาทิตย์ตก", desc: "08:00 น. พบกันที่จุดนัดพบ นั่งรถโฟร์วีลสู่หน่วยเด่นحอด เริ่มเดินเท้าขึ้นสู่จุดกางเต็นท์อ่างสลุง ชมพระอาทิตย์ตกดินบนยอดดอยหลวง" },
+                    { day: "วันที่ 2", title: "ชมพระอาทิตย์ขึ้น - เดินทางกลับ", desc: "05:30 น. เดินขึ้นยอดกิ่วปوชมทะเลหมอกและแสงแรก เก็บเต็นท์และเดินทางกลับถึงจุดจอดรถโดยสวัสดิภาพ" }
+                ],
+                dates: ["15-16 พ.ย. 2026", "22-23 พ.ย. 2026", "05-06 ธ.ค. 2026", "12-13 ธ.ค. 2026"]
+            },
+            {
+                id: 2,
+                title: "ภูลังกา ผาช้างน้อย - ทะเลหมอกสุดอลังการ",
+                destination: "พะเยา",
+                region: "ภาคเหนือ",
+                duration: "2 วัน 1 คืน",
+                durationDays: 2,
+                difficulty: "ง่าย",
+                price: 3290,
+                rating: 4.85,
+                reviewsCount: 96,
+                image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80",
+                overview: "สัมผัสบรรยากาศรีสอร์ทธรรมชาติและจุดชมวิวผาช้างน้อย ทะเลหมอกยามเช้าเคล้าสายหมอกหนาแบบพาโนรามา เดินป่าเบาๆ เหมาะสำหรับมือใหม่",
+                meetingPoint: "อำเภอปง จังหวัดพะเยา หรือจุดนัดพบในตัวเมืองเชียงราย",
+                included: [
+                    "ไกด์ท้องถิ่นนำทาง",
+                    "รถตู้ VIP รับ-ส่งตลอดทริป",
+                    "อาหาร 4 มื้อและเครื่องดื่มอุ่นๆ",
+                    "เต็นท์โดมวิวเขาส่วนตัว",
+                    "ประกันอุบัติเหตุการเดินทาง"
+                ],
+                itinerary: [
+                    { day: "วันที่ 1", title: "เดินทางสู่ผาช้างน้อย - ชมพระอาทิตย์ตก", desc: "09:00 น. ออกเดินทางจากจุดนัดพบ ถึงภูลังการีสอร์ท เดินเล่นชมวิวและพระอาทิตย์ตกดิน" },
+                    { day: "วันที่ 2", title: "ชมทะเลหมอกผาช้างน้อย - เดินทางกลับ", desc: "06:00 น. ชมทะเลหมอกสุดสวย ถ่ายรูปคาเฟ่ชื่อดัง เดินทางกลับโดยสวัสดิภาพ" }
+                ],
+                dates: ["18-19 พ.ย. 2026", "25-26 พ.ย. 2026", "10-11 ธ.ค. 2026"]
+            },
+            {
+                id: 3,
+                title: "อุทยานแห่งชาติเขาสก - ป่าดึกดำบรรพ์ & ล่องแพไม้ไผ่",
+                destination: "สุราษฎร์ธานี",
+                region: "ภาคใต้",
+                duration: "3 วัน 2 คืน",
+                durationDays: 3,
+                difficulty: "ปานกลาง",
+                price: 4890,
+                rating: 4.9,
+                reviewsCount: 114,
+                image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80",
+                overview: "สำรวจป่าฝนโบราณอายุเก่าแก่กว่าป่าอะเมซอน ล่องเรือหางยาวเที่ยวเขื่อนเชี่ยวหลาน (กุ้ยหลินเมืองไทย) และเดินป่าถ้ำปะкаран",
+                meetingPoint: "ท่าเรือบ้านเชี่ยวหลาน หรือสนามบินสุราษฎร์ธานี",
+                included: [
+                    "ไกด์อุทยานธรรมชาติป่าฝน",
+                    "เรือหางยาวนำเที่ยวเขื่อนเชี่ยวหลาน",
+                    "แพที่พักริมน้ำและอาหาร 7 มื้อ",
+                    "ค่าธรรมเนียมอุทยานและกิจกรรมพายคายัค",
+                    "ประกันภัยอุบัติเหตุ"
+                ],
+                itinerary: [
+                    { day: "วันที่ 1", title: "ล่องเรือชมเขาสามเกลอ - เข้าพักแพริมน้ำ", desc: "09:00 น. พบกันที่ท่าเรือ ลงเรือหางยาวชมเขาสามเกลอ ทานอาหารกลางวัน พายเรือคายัค" },
+                    { day: "วันที่ 2", title: "เดินป่าศึกษาธรรมชาติ - ล่องแพไม้ไผ่ถ้ำปะการัง", desc: "08:30 น. เดินป่าชมดอกบัวผุด นั่งแพไม้ไผ่เข้าชมถ้ำปะการัง" },
+                    { day: "วันที่ 3", title: "ชมหมอกยามเช้า - เดินทางกลับ", desc: "06:30 น. นั่งเรือชมธรรมชาติยามเช้า ทานอาหารเช้าและเดินทางกลับท่าเรือ" }
+                ],
+                dates: ["20-22 พ.ย. 2026", "03-05 ธ.ค. 2026", "17-19 ธ.ค. 2026"]
+            },
+            {
+                id: 4,
+                title: "กิ่วแม่ปาน ดอยอินทนนท์ - เส้นทางศึกษาธรรมชาติ",
+                destination: "เชียงใหม่",
+                region: "ภาคเหนือ",
+                duration: "1 วัน (Day Trip)",
+                durationDays: 1,
+                difficulty: "ง่าย",
+                price: 1590,
+                rating: 4.9,
+                reviewsCount: 240,
+                image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80",
+                overview: "เส้นทางเดินป่าสั้นๆ เหมาะสำหรับมือใหม่ ชมป่าดิบชื้น ทะเลหมอกสุดอลังการ และกุหลาบพันปีพันปี",
+                meetingPoint: "ตัวเมืองเชียงใหม่ (รับ-ส่งจากโรงแรม)",
+                included: [
+                    "รถตู้ปรับอากาศ VIP รับ-ส่งถึงที่พักในเชียงใหม่",
+                    "ไกด์ชุมชนท้องถิ่นบังคับตามระเบียบอุทยาน",
+                    "ค่าธรรมเนียมอุทยานแห่งชาติดอยอินทนนท์",
+                    "อาหารกลางวันแบบกล่องและน้ำดื่ม",
+                    "ประกันภัยอุบัติเหตุ"
+                ],
+                itinerary: [
+                    { day: "วันที่ 1", title: "เดินทางสู่อินทนนท์ - เดินกิ่วแม่ปาน", desc: "06:00 น. รับจากโรงแรม เดินทางสู่อินทนนท์ เริ่มเดินเส้นทางกิ่วแม่ปาน แวะชมพระมหาธาตุ และเดินทางกลับเชียงใหม่" }
+                ],
+                dates: ["ทุกวันเสาร์-อาทิตย์ตลอดฤดูกาล"]
+            }
+        ];
+
+        // Global State for Multi-Step Booking
+        let bookingState = {
+            tripId: null,
+            tripTitle: '',
+            basePrice: 0,
+            selectedDate: '',
+            participants: 1,
+            selectedSeats: [], // e.g. ["โซนรถตู้ VIP - เบาะ 1", "เต็นท์วิวเขาส่วนตัว (โซน A)"]
+            customerName: '',
+            customerPhone: '',
+            customerEmail: '',
+            totalAmount: 0,
+            paymentSlip: null
+        };
+
+        // Render trips list
+        function renderTrips(data) {
+            const grid = document.getElementById('trips-grid');
+            if (data.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center">
+                        <div class="text-5xl mb-3 text-gray-300"><i class="fa-solid fa-mountain"></i></div>
+                        <h3 class="text-xl font-bold text-gray-700">ไม่พบทริปที่ค้นหา</h3>
+                        <p class="text-gray-500 text-sm mt-1">ลองเปลี่ยนเงื่อนไขการค้นหาหรือเลือกดูทริปทั้งหมดอีกครั้ง</p>
+                        <button onclick="resetFilters()" class="mt-4 bg-forest-700 text-white px-5 py-2 rounded-xl text-sm font-medium shadow">ล้างตัวกรอง</button>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = data.map(trip => `
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative h-60 overflow-hidden">
+                            <img src="${trip.image}" alt="${trip.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/800x600/166534/ffffff?text=WildTrail'">
+                            <div class="absolute top-4 left-4 flex gap-2">
+                                <span class="bg-black/60 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                    <i class="fa-solid fa-location-dot text-forest-500 mr-1"></i> ${trip.destination}
+                                </span>
+                            </div>
+                            <div class="absolute top-4 right-4">
+                                <span class="bg-white/90 backdrop-blur-md text-gray-900 text-xs font-bold px-3 py-1 rounded-full shadow">
+                                    <i class="fa-solid fa-star text-amber-400 mr-1"></i> ${trip.rating} (${trip.reviewsCount})
+                                </span>
+                            </div>
+                            <div class="absolute bottom-4 left-4">
+                                <span class="bg-forest-700/90 text-white text-xs font-semibold px-3 py-1.5 rounded-xl backdrop-blur-sm">
+                                    ${trip.duration}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-bold uppercase tracking-wider text-forest-700 bg-forest-50 px-2.5 py-1 rounded-lg">
+                                    ความยาก: ${trip.difficulty}
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-forest-700 transition">${trip.title}</h3>
+                            <p class="text-gray-600 text-sm line-clamp-2 leading-relaxed mb-4">${trip.overview}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-4">
+                        <div>
+                            <span class="text-xs text-gray-400 block font-medium">เริ่มต้นเพียง</span>
+                            <span class="text-2xl font-extrabold text-forest-700">฿${trip.price.toLocaleString()}</span>
+                            <span class="text-xs text-gray-500"> / ท่าน</span>
+                        </div>
+                        <button onclick="startBookingFlow(${trip.id})" class="bg-forest-700 hover:bg-forest-800 text-white px-5 py-2.5 rounded-xl font-medium text-sm shadow transition flex items-center gap-2">
+                            จองทริปเลย <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter trips
+        function filterTrips() {
+            const dest = document.getElementById('search-destination').value;
+            const diff = document.getElementById('search-difficulty').value;
+
+            let filtered = tripsData.filter(trip => {
+                const matchDest = dest === "" || trip.destination.includes(dest);
+                const matchDiff = diff === "" || trip.difficulty === diff;
+                return matchDest && matchDiff;
+            });
+
+            renderTrips(filtered);
+        }
+
+        function resetFilters() {
+            document.getElementById('search-destination').value = "";
+            document.getElementById('search-difficulty').value = "";
+            document.getElementById('sort-by').value = "default";
+            renderTrips(tripsData);
+        }
+
+        function sortTrips() {
+            const sortBy = document.getElementById('sort-by').value;
+            let currentTrips = [...tripsData];
+
+            if (sortBy === 'price-asc') {
+                currentTrips.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-desc') {
+                currentTrips.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'duration') {
+                currentTrips.sort((a, b) => a.durationDays - b.durationDays);
+            }
+
+            renderTrips(currentTrips);
+        }
+
+        function scrollToTrips() {
+            document.getElementById('trips').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ================= MULTI-STEP BOOKING FLOW =================
+
+        function startBookingFlow(id) {
+            const trip = tripsData.find(t => t.id === id);
+            if (!trip) return;
+
+            bookingState = {
+                tripId: trip.id,
+                tripTitle: trip.title,
+                basePrice: trip.price,
+                selectedDate: trip.dates[0],
+                participants: 1,
+                selectedSeats: ['เต็นท์วิวเขาส่วนตัว (โซน A-01)', 'รถตู้ VIP - เบาะ 1A (แถวหน้าสุด)'],
+                customerName: '',
+                customerPhone: '',
+                customerEmail: '',
+                totalAmount: trip.price,
+                paymentSlip: null
+            };
+
+            renderStep(1);
+
+            const modal = document.getElementById('trip-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateStepIndicators(activeStep) {
+            const indicators = document.querySelectorAll('.step-ind');
+            indicators.forEach(ind => {
+                const stepNum = parseInt(ind.getAttribute('data-step'));
+                const circle = ind.querySelector('div');
+                const label = ind.querySelector('span');
+
+                if (stepNum < activeStep) {
+                    circle.className = "w-8 h-8 rounded-full bg-forest-700 text-white flex items-center justify-center font-bold text-xs shadow";
+                    circle.innerHTML = '<i class="fa-solid fa-check text-xs"></i>';
+                    label.className = "text-[11px] font-semibold text-forest-700 mt-1";
+                } else if (stepNum === activeStep) {
+                    circle.className = "w-8 h-8 rounded-full bg-forest-700 text-white flex items-center justify-center font-bold text-xs ring-4 ring-forest-100";
+                    circle.innerText = stepNum;
+                    label.className = "text-[11px] font-bold text-forest-700 mt-1";
+                } else {
+                    circle.className = "w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold text-xs";
+                    circle.innerText = stepNum;
+                    label.className = "text-[11px] font-semibold text-gray-400 mt-1";
+                }
+            });
+        }
+
+        function renderStep(step) {
+            updateStepIndicators(step);
+            const trip = tripsData.find(t => t.id === bookingState.tripId);
+            const body = document.getElementById('modal-body-content');
+
+            if (step === 1) {
+                // Step 1: Trip Details & Date Selection
+                body.innerHTML = `
+                    <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden mb-6">
+                        <img src="${trip.image}" alt="${trip.title}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-6">
+                            <div class="text-white">
+                                <span class="bg-forest-700 text-white text-xs font-bold px-3 py-1 rounded-full">${trip.destination}</span>
+                                <h2 class="text-xl sm:text-2xl font-extrabold mt-2">${trip.title}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-2">ไฮไลท์สำคัญ</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed">${trip.overview}</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                            <div>
+                                <span class="text-xs text-gray-400 block font-semibold uppercase">ระยะเวลาทริป</span>
+                                <span class="font-bold text-gray-800 text-sm">${trip.duration}</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-gray-400 block font-semibold uppercase">ระดับความยาก</span>
+                                <span class="font-bold text-forest-700 text-sm">${trip.difficulty}</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">เลือก รอบวันที่เดินทาง</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                ${trip.dates.map(d => `
+                                    <button type="button" onclick="selectDate('${d}')" class="p-3 border rounded-xl text-xs font-medium transition text-center ${bookingState.selectedDate === d ? 'border-forest-700 bg-forest-50 text-forest-800 font-bold shadow-sm' : 'border-gray-200 hover:border-gray-300 text-gray-700'}">
+                                        <i class="fa-regular fa-calendar text-forest-700 mr-1.5"></i> ${d}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">จำนวนผู้เดินทาง (ท่าน)</label>
+                            <div class="flex items-center gap-4">
+                                <input type="number" id="participants-input" min="1" max="10" value="${bookingState.participants}" onchange="updateParticipants(this.value)" class="w-32 bg-white border border-gray-300 rounded-xl p-3 text-sm font-bold text-center focus:outline-none focus:border-forest-600">
+                                <span class="text-sm text-gray-500 font-medium">ราคาเริ่มต้น ฿${trip.price.toLocaleString()} / ท่าน</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-400 block font-medium">ราคารวมเบื้องต้น</span>
+                                <span class="text-2xl font-extrabold text-forest-700">฿${(trip.price * bookingState.participants).toLocaleString()}</span>
+                            </div>
+                            <button onclick="goToStep(2)" class="bg-forest-700 hover:bg-forest-800 text-white font-bold px-8 py-3.5 rounded-xl shadow transition flex items-center gap-2">
+                                ถัดไป: เลือกที่นั่ง/เต็นท์ <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (step === 2) {
+                // Step 2: Seat, Tent & Transfer Selection
+                body.innerHTML = `
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">เลือกโซนที่นั่งรถตู้ VIP และเต็นท์ที่พัก</h3>
+                            <p class="text-gray-500 text-sm">ปรับแต่งประสบการณ์การพักผ่อนและการเดินทางของคุณตามต้องการ</p>
+                        </div>
+
+                        <!-- Tent Selection Box -->
+                        <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                            <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-campground text-forest-700"></i> เลือกโซนเต็นท์แรม
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label class="flex items-start gap-3 p-3.5 bg-white border rounded-xl cursor-pointer hover:border-forest-600 transition ${bookingState.selectedSeats.some(s => s.includes('เต็นท์วิวเขาส่วนตัว')) ? 'border-forest-700 ring-2 ring-forest-100 bg-forest-50/50' : 'border-gray-200'}">
+                                    <input type="radio" name="tent_zone" checked onchange="toggleSeatSelection('เต็นท์วิวเขาส่วนตัว (โซน A-01)', true)" class="mt-1 text-forest-700">
+                                    <div>
+                                        <span class="block font-bold text-xs text-gray-900">เต็นท์วิวเขาส่วนตัว (โซน A)</span>
+                                        <span class="text-xs text-gray-500">วิวสวยที่สุด ใกล้จุดชมวิว (ฟรี +฿300)</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-start gap-3 p-3.5 bg-white border rounded-xl cursor-pointer hover:border-forest-600 transition">
+                                    <input type="radio" name="tent_zone" onchange="toggleSeatSelection('เต็นท์มาตรฐาน (โซน B)', true)" class="mt-1 text-forest-700">
+                                    <div>
+                                        <span class="block font-bold text-xs text-gray-900">เต็นท์โดมมาตรฐาน (โซน B)</span>
+                                        <span class="text-xs text-gray-500">ร่มรื่น ใกล้จุดห้องน้ำ (รวมในแพ็กเกจ)</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Van Seat Selection Box -->
+                        <div class="bg-gray-50 p-5 rounded-2xl border border-gray-200">
+                            <h4 class="font-bold text-gray-900 text-sm mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-van-shuttle text-forest-700"></i> เลือกเบาะที่นั่งรถตู้ VIP (ไป-กลับ)
+                            </h4>
+                            <p class="text-xs text-gray-500 mb-3">ผังที่นั่งรถตู้ VIP 9 ที่นั่ง (คลิกเลือกเบาะที่ต้องการ)</p>
+                            
+                            <div class="grid grid-cols-3 gap-2 max-w-xs mx-auto bg-white p-4 rounded-xl border border-gray-200 shadow-inner">
+                                <div class="text-center text-xs text-gray-400 col-span-3 pb-2 border-b">ด้านหน้ารถ (คนขับ / ไกด์)</div>
+                                <button type="button" onclick="toggleVanSeat('เบาะ 1A')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 1A') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 1A (หน้า)</button>
+                                <div class="col-span-2 text-center text-xs text-gray-300 flex items-center justify-center font-semibold">ทางเดิน</div>
+                                
+                                <button type="button" onclick="toggleVanSeat('เบาะ 2A')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 2A') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 2A</button>
+                                <button type="button" onclick="toggleVanSeat('เบาะ 2B')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 2B') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 2B</button>
+                                <button type="button" onclick="toggleVanSeat('เบาะ 2C')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 2C') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 2C</button>
+                                
+                                <button type="button" onclick="toggleVanSeat('เบาะ 3A')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 3A') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 3A</button>
+                                <button type="button" onclick="toggleVanSeat('เบาะ 3B')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 3B') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 3B</button>
+                                <button type="button" onclick="toggleVanSeat('เบาะ 3C')" class="seat-btn p-2.5 rounded-lg border text-xs font-bold transition ${bookingState.selectedSeats.includes('เบาะ 3C') ? 'bg-forest-700 text-white border-forest-700 shadow' : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-forest-50'}">เบาะ 3C</button>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <button onclick="goToStep(1)" class="px-6 py-3 border border-gray-300 rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 transition">
+                                <i class="fa-solid fa-arrow-left mr-1"></i> ย้อนกลับ
+                            </button>
+                            <button onclick="goToStep(3)" class="bg-forest-700 hover:bg-forest-800 text-white font-bold px-8 py-3.5 rounded-xl shadow transition flex items-center gap-2">
+                                ถัดไป: กรอกข้อมูลผู้จอง <i class="fa-solid fa-arrow-right text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (step === 3) {
+                // Step 3: Customer Information Form
+                body.innerHTML = `
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">ข้อมูลผู้ติดต่อและผู้เดินทาง</h3>
+                            <p class="text-gray-500 text-sm">กรุณากรอกข้อมูลให้ครบถ้วนเพื่อใช้ออกกรมธรรม์ประกันภัยการเดินทางและตั๋วอิเล็กทรอนิกส์</p>
+                        </div>
+
+                        <form id="customer-form" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-700 uppercase mb-1">ชื่อ - นามสกุล (ผู้จองหลัก)</label>
+                                <input type="text" id="cust-name" value="${bookingState.customerName}" required placeholder="เช่น สมชาย ใจดี" class="w-full bg-white border border-gray-300 rounded-xl p-3.5 text-sm focus:outline-none focus:border-forest-600 font-medium">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">เบอร์โทรศัพท์มือถือ</label>
+                                    <input type="tel" id="cust-phone" value="${bookingState.customerPhone}" required placeholder="0891234567" class="w-full bg-white border border-gray-300 rounded-xl p-3.5 text-sm focus:outline-none focus:border-forest-600 font-medium">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">อีเมลสำหรับรับตั๋ว</label>
+                                    <input type="email" id="cust-email" value="${bookingState.customerEmail}" required placeholder="somchai@example.com" class="w-full bg-white border border-gray-300 rounded-xl p-3.5 text-sm focus:outline-none focus:border-forest-600 font-medium">
+                                </div>
+                            </div>
+
+                            <div class="bg-forest-50 p-4 rounded-2xl border border-forest-100 flex items-center justify-between text-sm">
+                                <div>
+                                    <span class="block font-bold text-forest-900">สรุปรายการที่เลือก:</span>
+                                    <span class="text-xs text-forest-700">${bookingState.tripTitle} (${bookingState.selectedDate})</span>
+                                    <span class="block text-xs text-gray-600 mt-1">จำนวน: ${bookingState.participants} ท่าน | ที่นั่ง/เต็นท์: ${bookingState.selectedSeats.join(', ')}</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs text-gray-500 block">ยอดรวมทั้งสิ้น</span>
+                                    <span class="text-xl font-extrabold text-forest-700">฿${calculateTotalAmount().toLocaleString()}</span>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                <button type="button" onclick="goToStep(2)" class="px-6 py-3 border border-gray-300 rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 transition">
+                                    <i class="fa-solid fa-arrow-left mr-1"></i> ย้อนกลับ
+                                </button>
+                                <button type="button" onclick="validateAndProceedToPayment()" class="bg-forest-700 hover:bg-forest-800 text-white font-bold px-8 py-3.5 rounded-xl shadow transition flex items-center gap-2">
+                                    ถัดไป: ชำระเงิน & อัปสลิป <i class="fa-solid fa-arrow-right text-xs"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+            } else if (step === 4) {
+                // Step 4: Payment & Slip Upload
+                body.innerHTML = `
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">ชำระเงินและอัปโหลดสลิปโอนเงิน</h3>
+                            <p class="text-gray-500 text-sm">สแกน QR Code พร้อมเพย์หรือโอนผ่านบัญชีธนาคารด้านล่าง จากนั้นแนบสลิปเพื่อยืนยันการจอง</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Bank & QR Code Box -->
+                            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-200 text-center flex flex-col items-center justify-center">
+                                <div class="w-40 h-40 bg-white p-3 rounded-2xl shadow-sm border border-gray-200 mb-4 flex items-center justify-center relative group">
+                                    <!-- Simulated PromptPay QR Code Icon/Graphic -->
+                                    <div class="text-center">
+                                        <i class="fa-solid fa-qrcode text-6xl text-forest-800 mb-1"></i>
+                                        <span class="block text-[10px] font-bold text-forest-700 uppercase">PromptPay QR</span>
+                                    </div>
+                                </div>
+                                <div class="text-left w-full space-y-1.5 bg-white p-4 rounded-xl border border-gray-200 text-xs">
+                                    <div class="flex justify-between"><span class="text-gray-500">ธนาคาร:</span> <span class="font-bold text-gray-800">กสิกรไทย (KBANK)</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">ชื่อบัญชี:</span> <span class="font-bold text-gray-800">บจก. ไวลด์เทรล ไทยแลนด์</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">เลขที่บัญชี:</span> <span class="font-bold text-forest-700">123-4-56789-0</span></div>
+                                    <div class="flex justify-between pt-2 border-t"><span class="text-gray-500 font-bold">ยอดที่ต้องชำระ:</span> <span class="font-extrabold text-forest-700 text-sm">฿${calculateTotalAmount().toLocaleString()}</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Upload Slip Form -->
+                            <div class="space-y-4 flex flex-col justify-between">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">อัปโหลดสลิปโอนเงิน (รูปภาพ .JPG/.PNG)</label>
+                                        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-forest-600 transition bg-gray-50 relative cursor-pointer" onclick="document.getElementById('slip-file-input').click()">
+                                            <div id="slip-preview-container">
+                                                <i class="fa-solid fa-cloud-arrow-up text-3xl text-forest-700 mb-2"></i>
+                                                <span class="block text-xs font-bold text-gray-700">คลิกเพื่ออัปโหลดสลิปโอนเงิน</span>
+                                                <span class="text-[11px] text-gray-400">รองรับไฟล์ PNG, JPG ขนาดไม่เกิน 5MB</span>
+                                            </div>
+                                            <input type="file" id="slip-file-input" accept="image/*" class="hidden" onchange="handleSlipUpload(event)">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">เวลาที่โอนเงิน (ระบุบนสลิป)</label>
+                                        <input type="time" id="transfer-time" value="12:30" class="w-full bg-white border border-gray-300 rounded-xl p-3 text-sm focus:outline-none focus:border-forest-600 font-medium">
+                                    </div>
+                                </div>
+
+                                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                                    <button type="button" onclick="goToStep(3)" class="px-6 py-3 border border-gray-300 rounded-xl text-gray-700 font-semibold text-sm hover:bg-gray-50 transition">
+                                        <i class="fa-solid fa-arrow-left mr-1"></i> ย้อนกลับ
+                                    </button>
+                                    <button type="button" onclick="submitFinalBooking()" class="bg-forest-700 hover:bg-forest-800 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg transition flex items-center gap-2">
+                                        <i class="fa-solid fa-check-circle"></i> ยืนยันการชำระเงิน
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Helper functions for booking steps
+        function selectDate(date) {
+            bookingState.selectedDate = date;
+            renderStep(1);
+        }
+
+        function updateParticipants(val) {
+            bookingState.participants = parseInt(val) || 1;
+            // Recalculate price preview
+            const trip = tripsData.find(t => t.id === bookingState.tripId);
+            const total = trip.price * bookingState.participants;
+            // update total text if present
+            const totalEl = document.querySelector('.text-2xl.font-extrabold');
+            if (totalEl) totalEl.innerText = '฿' + total.toLocaleString();
+        }
+
+        function toggleSeatSelection(seatName, isTent) {
+            if (isTent) {
+                // remove other tents and add new
+                bookingState.selectedSeats = bookingState.selectedSeats.filter(s => !s.includes('เต็นท์'));
+                bookingState.selectedSeats.push(seatName);
+            }
+        }
+
+        function toggleVanSeat(seatNo) {
+            const index = bookingState.selectedSeats.indexOf(seatNo);
+            if (index > -1) {
+                bookingState.selectedSeats.splice(index, 1);
+            } else {
+                bookingState.selectedSeats.push(seatNo);
+            }
+            // Re-render step 2 to update button colors
+            renderStep(2);
+        }
+
+        function calculateTotalAmount() {
+            const trip = tripsData.find(t => t.id === bookingState.tripId);
+            let base = trip.price * bookingState.participants;
+            // Add extra if tent zone A selected
+            if (bookingState.selectedSeats.some(s => s.includes('เต็นท์วิวเขาส่วนตัว'))) {
+                base += 300 * bookingState.participants;
+            }
+            bookingState.totalAmount = base;
+            return base;
+        }
+
+        function goToStep(step) {
+            if (step === 3) {
+                // save step 2 info if needed
+            }
+            if (step === 4) {
+                const name = document.getElementById('cust-name').value;
+                const phone = document.getElementById('cust-phone').value;
+                const email = document.getElementById('cust-email').value;
+
+                if (!name || !phone || !email) {
+                    alert('กรุณากรอกข้อมูลผู้ติดต่อให้ครบถ้วน');
+                    return;
+                }
+                bookingState.customerName = name;
+                bookingState.customerPhone = phone;
+                bookingState.customerEmail = email;
+            }
+            renderStep(step);
+        }
+
+        function handleSlipUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                bookingState.paymentSlip = file.name;
+                const container = document.getElementById('slip-preview-container');
+                container.innerHTML = `
+                    <i class="fa-solid fa-file-circle-check text-3xl text-forest-700 mb-2"></i>
+                    <span class="block text-xs font-bold text-forest-800">อัปโหลดสลิปสำเร็จ: ${file.name}</span>
+                    <span class="text-[11px] text-gray-500 underline mt-1 block">คลิกเพื่อเปลี่ยนรูปสลิป</span>
+                `;
+            }
+        }
+
+        function submitFinalBooking() {
+            if (!bookingState.paymentSlip) {
+                alert('กรุณาอัปโหลดสลิปโอนเงินก่อนยืนยันการทำรายการ');
+                return;
+            }
+
+            // Close modal
+            closeModal();
+
+            // Show success confirmation modal with generated booking code
+            const randomCode = 'WT-2026-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('success-booking-code').innerText = 'รหัสการจอง: ' + randomCode;
+
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('trip-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeSuccessModal() {
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.add('hidden');
+            successModal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize on load
+        window.onload = function() {
+            renderTrips(tripsData);
+        };
+    </script>
+</body>
+</html>
